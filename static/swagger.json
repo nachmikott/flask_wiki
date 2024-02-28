@@ -1,0 +1,157 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "FlaskWiki API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/by-article/view_count/{article}": {
+          "get": {
+            "description": "Returns the number of views given {article} had on Wikipedia within the interval of start_timestamp to end_timestamp.",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "in": "path",
+                "name": "article",
+                "schema": {
+                  "type": "string"
+                },
+                "required": true,
+                "description": "name of a wikipedia article"
+              },
+              {
+                "in": "query",
+                "name": "start_timestamp",
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Must be in YYYYMMDDHH format (Ex/ 2023010101)"
+              },
+              {
+                "in": "query",
+                "name": "end_timestamp",
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Must be in YYYYMMDDHH format (Ex/ 2023013101)"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Successful operation."
+              },
+              "502": {
+                "description": "Unsuccessful, the Wiki API Returns 200 but with incompatible results."
+              },
+              "500": {
+                "description": "Unsuccessful, the Wiki API fails, or FlaskWiki fail."
+              },
+              "400": {
+                "description": "Unsuccessful, incompatible requird queries."
+              },
+              "404": {
+                "description": "Unsuccessful, URL or Resource not Found."
+              }
+            }
+          }
+        },
+        "/by-article/date_of_most_views/{article}": {
+          "get": {
+            "description": "Returns the date (in YYYYMMDD format) in which the {article} was most viewed on Wikipedia.",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "in": "path",
+                "name": "article",
+                "schema": {
+                  "type": "string"
+                },
+                "required": true,
+                "description": "The name of a Wikipedia article"
+              },
+              {
+                "in": "query",
+                "name": "start_timestamp",
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Must be in YYYYMMDDHH format (Ex/ 2023010101)"
+              },
+              {
+                "in": "query",
+                "name": "end_timestamp",
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Must be in YYYYMMDDHH format (Ex/ 2023013101)"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Successful operation."
+              },
+              "502": {
+                "description": "Unsuccessful, the Wiki API Returns 200 but with incompatible results."
+              },
+              "500": {
+                "description": "Unsuccessful, the Wiki API fails, or FlaskWiki fail."
+              },
+              "400": {
+                "description": "Unsuccessful, incompatible requird queries."
+              },
+              "404": {
+                "description": "Unsuccessful, URL or Resource not Found."
+              }
+            }
+          }
+        },
+        "/top/most_viewed_articles/{date}": {
+          "get": {
+            "description": "Returns the most viewed articles on a given date. {date} can be be YYYYMM (ex 202301) format or YYYMMDD (ex 20230101). If no DD is in format, the search will include all days of the month.",
+            "produces": [
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "in": "path",
+                "name": "date",
+                "schema": {
+                  "type": "string"
+                },
+                "required": true,
+                "description": "The date in YYYYMMDD or YYYYMM format (ex/ 202301"
+              },
+              {
+                "in": "query",
+                "name": "limit",
+                "schema": {
+                  "type": "int"
+                },
+                "description": "Number of article names to return. Default is 1000."
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Successful operation."
+              },
+              "502": {
+                "description": "Unsuccessful, the Wiki API Returns 200 but with incompatible results."
+              },
+              "500": {
+                "description": "Unsuccessful, the Wiki API fails, or FlaskWiki fail."
+              },
+              "400": {
+                "description": "Unsuccessful, incompatible requird queries."
+              },
+              "404": {
+                "description": "Unsuccessful, URL or Resource not Found."
+              }
+            }
+          }
+        }
+    }
+}
